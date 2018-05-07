@@ -9,6 +9,13 @@ public class Notificacao extends GeneralEntity{
 	
 	private String texto;
 
+	
+	public Notificacao(Cliente user, String texto) {
+		super();
+		this.user = user;
+		this.texto = texto;
+	}
+
 	public Cliente getUser() {
 		return user;
 	}

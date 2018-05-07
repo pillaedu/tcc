@@ -1,6 +1,13 @@
 package edu.grupo.TCC.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cliente extends GeneralEntity{
@@ -11,7 +18,28 @@ public class Cliente extends GeneralEntity{
 	
 	private String username;
 	
+	private String cpf;
+
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedido;
 	
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedido;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedido = pedidos;
+	}
+
 	public String getEmail() {
 		return email;
 	}

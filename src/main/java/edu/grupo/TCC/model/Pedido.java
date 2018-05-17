@@ -5,14 +5,22 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Pedido extends GeneralEntity{
+public class Pedido{
 
+	@Id 
+	@SequenceGenerator(name="pedido_sequence_pk",sequenceName="pedido_id_seq", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.AUTO ,generator="pedido_sequence_pk")
+	@Column(name="id_pedido", unique=true, nullable=false)
+	private long id;
+	
 	@Column(name="status", nullable=false)
 	private String status;
 	
@@ -23,20 +31,29 @@ public class Pedido extends GeneralEntity{
 	@Temporal(TemporalType.TIMESTAMP)
 	private java.util.Date data;
 	
-	@ManyToOne
+	/*
+	//@ManyToOne
 	private Cliente cliente;
 	
-	@OneToMany
+	//@OneToMany
 	private List<Prato> prato;
 	
+	*/
 	
-	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	/*
 	public Cliente getUsuario() {
 		return cliente;
 	}
 	public void setUsuario(Cliente usuario) {
 		this.cliente = usuario;
 	}
+	*/
 	public String getStatus() {
 		return status;
 	}

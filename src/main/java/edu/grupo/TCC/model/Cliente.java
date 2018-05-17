@@ -2,28 +2,58 @@ package edu.grupo.TCC.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-public class Cliente extends GeneralEntity{
+@Table(uniqueConstraints = @UniqueConstraint(
+		columnNames = "user_name" ,name = "cliente_unique_name" )
+)
+public class Cliente{
+	
+	@Id 
+	@SequenceGenerator(name="cliente_sequence_pk",sequenceName="cliente_id_seq", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.AUTO ,generator="cliente_sequence_pk")
+	@Column(name="id_cliente", unique=true, nullable=false)
+	private long id;
 
 	private String nome;
 
 	private String email;
 	
+	@Column(name="user_name", unique=true)
 	private String username;
 	
 	private String cpf;
 
-	@OneToMany(mappedBy = "cliente")
-	private List<Pedido> pedido;
+	//@OneToMany(mappedBy = "cliente")
+	//private List<Pedido> pedido;
 	
+	public long getId() {
+		return id;
+	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	/*
+	public List<Pedido> getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(List<Pedido> pedido) {
+		this.pedido = pedido;
+	}
+
+	*/
 	public String getCpf() {
 		return cpf;
 	}
@@ -31,7 +61,7 @@ public class Cliente extends GeneralEntity{
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
+/*
 	public List<Pedido> getPedidos() {
 		return pedido;
 	}
@@ -39,7 +69,7 @@ public class Cliente extends GeneralEntity{
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedido = pedidos;
 	}
-
+*/
 	public String getEmail() {
 		return email;
 	}
